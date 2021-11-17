@@ -1,13 +1,17 @@
 .s {
+	margin-top: 0px;
 	padding: 5px;
+	align-self: auto;
 	border-radius: 25px;
 	border: 2px;
 	border-style: solid;
-	border-color: #E8F6EF;
-	background-color: #E8F6EF;
+	border-color: #EDEDED;
+	color: #EDEDED;
+	background-color: #EDEDED;
 	text-align: center;
-	box-shadow: 5px 5px 15px 1px;
+	box-shadow: 5px 5px 10px 3px;
 	display: grid;
+	align-items: top;
 	
 }
 
@@ -58,5 +62,11 @@ p {
 	color: white;
 	font-size:20px ;
 
+}
+
+h2 {
+	color:#FFAB4C;
+	margin-left: 1px;
+	font-size: 30px;
 }
 
