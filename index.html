@@ -1,33 +1,154 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
 <head>
- <style>
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
-</style> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>momo's file fetcher</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
 
-<link rel="stylesheet" type="text/css" href="main.css">
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, button {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="number"] {
+            width: calc(50% - 5px);
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
-<h2> happy birthday my princess</h2>
-<div class="s">
-<div class="container"> <div class="inner">
-    <span>i</span>
-    <h1> Happy birthday</h1>
-    <p class="new"> Every day with you is a great celebration, do you remember all beautiful moments? I love you baby.</p>
-</div></div>
-<div class="container"> <div class="inner">
-    <span>ii</span>
-    <h1> I Num you </h1>
-    <p class="new"> forever inshalla :)</p>
-</div></div>
-<div class="container"> <div class="inner">
-    <span>iii</span>
-    <h1> gift time</h1>
-    <p class="new"> I have so many gifts for you tonight!</p>
-</div></div>
+    <header>
+        <h1>momo's file fetcher</h1>
+    </header>
 
-</div>
-    
+    <main>
+        <label for="customUrl">Custom Base URL:</label>
+        <input type="text" id="customUrl" placeholder="copy it from XHR of your file from F12/network">
+
+        <label for="pageStart">Start Page:</label>
+        <input type="number" id="pageStart" value="0">
+
+        <label for="pageEnd">End Page:</label>
+        <input type="number" id="pageEnd" value="39">
+
+        <button onclick="generateUrls()">Generate URLs</button>
+
+        <ul id="urlList"></ul>
+
+        <h2>Display Images</h2>
+        <div id="imageDisplay"></div>
+    </main>
+
+    <script>
+        function generateUrls() {
+            // Get custom URL, start and end page values
+            const customUrl = document.getElementById("customUrl").value;
+            const startPage = parseInt(document.getElementById("pageStart").value);
+            const endPage = parseInt(document.getElementById("pageEnd").value);
+
+            // Validation: Ensure custom URL is provided
+            if (!customUrl) {
+                alert("Please enter a custom base URL.");
+                return;
+            }
+
+            const urlList = document.getElementById("urlList");
+            const imageDisplay = document.getElementById("imageDisplay");
+
+            // Clear previous content
+            urlList.innerHTML = "";
+            imageDisplay.innerHTML = "";
+
+            // Generate URLs and add clickable links to the list
+            for (let i = startPage; i <= endPage; i++) {
+                const url = customUrl + i;
+                const listItem = document.createElement("li");
+
+                // Customize link name, e.g., "Page 1", "Page 2", ...
+                const linkName = "Page " + (i + 1);
+
+                // Create a clickable link
+                const link = document.createElement("a");
+                link.href = url;
+                link.textContent = linkName;
+                link.target = "_blank"; // Open the link in a new tab
+
+                // Append the link to the list item
+                listItem.appendChild(link);
+
+                // Append the list item to the list
+                urlList.appendChild(listItem);
+
+                // Display image on the page
+                const img = document.createElement("img");
+                img.src = url;
+                img.alt = linkName;
+
+                // Append the image to the display
+                imageDisplay.appendChild(img);
+            }
+        }
+    </script>
 </body>
 </html>
